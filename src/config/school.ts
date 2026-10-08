@@ -21,9 +21,9 @@ import playImg from "@/assets/gallery-play.jpg";
 import musicImg from "@/assets/gallery-music.jpg";
 
 /* Google Fonts stylesheet. Change the families here AND the
- * --font-heading / --font-body variables in src/styles.css. */
+ * --font-heading / --font-body / --font-accent variables in src/styles.css. */
 export const FONT_URL =
-  "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Nunito+Sans:wght@400;600;700&display=swap";
+  "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap";
 
 export const school = {
   /* ---- Identity ------------------------------------------------------ */
@@ -48,6 +48,7 @@ export const school = {
   hero: {
     eyebrow: "Now enrolling for the new academic year",
     headline: "Building Strong Foundations for Bright Futures.",
+    headlineAccent: "" as string,
     subtext:
       "Creating a safe, inspiring environment where every child can learn, grow and prepare for tomorrow.",
     image: heroImg,
@@ -102,7 +103,8 @@ export const school = {
   /* ---- School Life gallery (tall: true makes a taller tile) ---------- */
   gallery: {
     eyebrow: "School life",
-    title: "Learning, laughing and growing together.",
+    title: "Learning, laughing and growing",
+    titleAccent: "together.",
     items: [
       { src: playImg, alt: "Students playing football on the school field", tall: true },
       { src: musicImg, alt: "Students singing in music class with their teacher" },

@@ -6,27 +6,30 @@
 
 /* =====================================================================
  * BRAND CONFIG — change these to rebrand for a new school.
- *   --brand-primary   main color (nav, headings, primary surfaces)
- *   --brand-secondary warm accent (primary buttons, highlights)
- *   --brand-accent    fresh accent (icons, success, details)
+ *   --brand-primary   navy (nav, headings, primary surfaces, overlay base)
+ *   --brand-secondary orange accent (#FF5200 — primary buttons, highlights)
+ *   --brand-accent    orange accent (#FF5200 — eyebrow, icons, serif accent word)
  *   --brand-bg        page background
- *   --brand-surface   alternate section background
- *   --font-heading / --font-body: families loaded in FONT_URL
+ *   --brand-surface   alternate section background (pale blue)
+ *   --font-heading / --font-body: modern geometric sans (Plus Jakarta Sans)
+ *   --font-accent: italic serif for accent word only (Playfair Display Italic)
  *   (src/config/school.ts)
  * ===================================================================== */
 :root {
-  --brand-primary: oklch(0.36 0.13 262);
-  --brand-secondary: oklch(0.82 0.16 75);
-  --brand-accent: oklch(0.66 0.15 150);
+  --brand-primary: #0b1e42;
+  --brand-secondary: #ff5200;
+  --brand-accent: #ff5200;
   --brand-bg: oklch(0.99 0.005 90);
   --brand-surface: oklch(0.965 0.015 250);
-  --font-heading: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-accent: "Playfair Display", Georgia, serif;
 }
 
 @theme inline {
   --font-heading: var(--font-heading);
   --font-sans: var(--font-body);
+  --font-accent: var(--font-accent);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -61,21 +64,21 @@
 :root {
   --radius: 1rem;
   --background: var(--brand-bg);
-  --foreground: oklch(0.22 0.04 262);
+  --foreground: #0b1e42;
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.04 262);
+  --card-foreground: #0b1e42;
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.22 0.04 262);
+  --popover-foreground: #0b1e42;
   --primary: var(--brand-primary);
-  --primary-foreground: oklch(0.99 0 0);
+  --primary-foreground: #eef3ff;
   --secondary: var(--brand-secondary);
-  --secondary-foreground: oklch(0.22 0.05 262);
+  --secondary-foreground: oklch(0.99 0 0);
   --accent: var(--brand-accent);
   --accent-foreground: oklch(0.99 0 0);
   --muted: oklch(0.95 0.01 250);
   --muted-foreground: oklch(0.48 0.03 262);
   --surface: var(--brand-surface);
-  --overlay: oklch(0.18 0.08 262);
+  --overlay: #0a1834;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.99 0 0);
   --border: oklch(0.91 0.015 255);
@@ -92,15 +95,17 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-body);
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
   }
   h1, h2, h3, h4 { font-family: var(--font-heading); letter-spacing: -0.02em; }
+  h1, h2 { font-weight: 800; }
 }
 
-/* Buttons */
+/* Buttons — sans-serif, medium/semibold */
 @utility btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-  border-radius: 9999px; padding: 0.85rem 1.6rem; font-weight: 700;
+  border-radius: 9999px; padding: 0.85rem 1.6rem; font-family: var(--font-body); font-weight: 600;
   transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease;
   &:hover { transform: translateY(-2px); }
   &:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
@@ -127,8 +132,14 @@
     color-mix(in oklab, var(--overlay) 15%, transparent) 100%);
 }
 @utility eyebrow {
-  display: inline-block; font-size: .8rem; font-weight: 700; letter-spacing: .14em;
+  display: inline-block; font-family: var(--font-body); font-size: .8rem; font-weight: 600; letter-spacing: .18em;
   text-transform: uppercase; color: var(--accent);
+}
+
+/* Italic serif accent word — orange, elegant, high-contrast. Use only for "together." */
+@utility accent-word {
+  font-family: var(--font-accent); font-style: italic; font-weight: 500;
+  letter-spacing: 0; color: var(--brand-secondary);
 }
 
 /* Scroll reveal */

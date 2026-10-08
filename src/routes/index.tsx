@@ -39,11 +39,11 @@ function Reveal({ children, delay = 0, className = "" }: { children: ReactNode; 
   return <div ref={ref} className={`reveal ${className}`} style={{ transitionDelay: `${delay}ms` }}>{children}</div>;
 }
 
-function SectionHead({ eyebrow, title, center = true }: { eyebrow: string; title: string; center?: boolean }) {
+function SectionHead({ eyebrow, title, titleAccent, center = true }: { eyebrow: string; title: string; titleAccent?: string; center?: boolean }) {
   return (
     <Reveal className={center ? "mx-auto max-w-2xl text-center" : ""}>
       <span className="eyebrow">{eyebrow}</span>
-      <h2 className="mt-3 text-3xl font-extrabold text-primary sm:text-4xl lg:text-5xl">{title}</h2>
+      <h2 className="mt-3 text-3xl font-extrabold text-primary sm:text-4xl lg:text-5xl">{title}{titleAccent ? <> <em className="accent-word">{titleAccent}</em></> : null}</h2>
     </Reveal>
   );
 }
@@ -109,11 +109,11 @@ function Hero() {
       <div className="hero-overlay absolute inset-0 -z-10" />
       <div className="mx-auto w-full max-w-7xl px-5 pb-16 pt-32">
         <div className="max-w-2xl text-primary-foreground">
-          <span className="hero-in inline-flex items-center gap-2 rounded-full bg-primary-foreground/15 px-4 py-1.5 text-sm font-semibold backdrop-blur">
+          <span className="hero-in inline-flex items-center gap-2 rounded-full bg-primary-foreground/15 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.14em] backdrop-blur">
             <span className="h-2 w-2 rounded-full bg-accent" />{h.eyebrow}
           </span>
-          <h1 className="hero-in mt-6 text-4xl font-extrabold leading-[1.05] sm:text-6xl lg:text-7xl" style={{ animationDelay: "120ms" }}>{h.headline}</h1>
-          <p className="hero-in mt-6 max-w-xl text-lg text-primary-foreground/85 sm:text-xl" style={{ animationDelay: "240ms" }}>{h.subtext}</p>
+          <h1 className="hero-in mt-6 text-4xl font-extrabold leading-[1.05] sm:text-6xl lg:text-7xl" style={{ animationDelay: "120ms" }}>{h.headline}{h.headlineAccent ? <> <em className="accent-word">{h.headlineAccent}</em></> : null}</h1>
+          <p className="hero-in mt-6 max-w-xl text-lg font-normal text-primary-foreground/85 sm:text-xl" style={{ animationDelay: "240ms" }}>{h.subtext}</p>
           <div className="hero-in mt-9 flex flex-wrap gap-3" style={{ animationDelay: "360ms" }}>
             <a href={h.primaryCta.href} className="btn btn-primary">{h.primaryCta.label}<ArrowRight className="h-4 w-4" /></a>
             <a href={h.secondaryCta.href} className="btn btn-ghost-light">{h.secondaryCta.label}</a>
@@ -224,7 +224,7 @@ function Gallery() {
   return (
     <section id="life" className="bg-surface py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-5">
-        <SectionHead eyebrow={g.eyebrow} title={g.title} />
+        <SectionHead eyebrow={g.eyebrow} title={g.title} titleAccent={g.titleAccent} />
         <div className="mt-14 grid auto-rows-[200px] grid-cols-2 gap-4 lg:grid-cols-3 lg:auto-rows-[240px]">
           {g.items.map((it, i) => (
             <button key={i} onClick={() => setActive(i)} className={`group relative overflow-hidden rounded-3xl shadow-soft focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-ring ${it.tall ? "row-span-2" : ""}`} aria-label={`Open photo: ${it.alt}`}>
@@ -329,7 +329,7 @@ function Footer() {
       <div className="mx-auto grid max-w-7xl gap-12 px-5 md:grid-cols-[1.2fr_1fr_1fr]">
         <div>
           <Logo light />
-          <p className="mt-4 max-w-xs text-primary-foreground/70">{school.tagline}</p>
+          <p className="mt-4 max-w-xs text-sm font-semibold uppercase tracking-[0.18em] text-primary-foreground/70">{school.tagline}</p>
           <div className="mt-6 flex gap-3">
             {socials.map((s) => (
               <a key={s.label} href={s.href} target="_blank" rel="noreferrer" aria-label={s.label} className="grid h-10 w-10 place-items-center rounded-full bg-primary-foreground/10 transition-colors hover:bg-secondary hover:text-secondary-foreground"><s.icon className="h-4 w-4" /></a>
