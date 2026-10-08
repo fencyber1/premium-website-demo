@@ -31,7 +31,7 @@ function Reveal({ children, delay = 0, className = "" }: { children: ReactNode; 
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { el.classList.add("is-visible"); io.disconnect(); }
+      if (e?.isIntersecting) { el.classList.add("is-visible"); io.disconnect(); }
     }, { threshold: 0.15 });
     io.observe(el);
     return () => io.disconnect();
@@ -234,10 +234,10 @@ function Gallery() {
           ))}
         </div>
       </div>
-      {active !== null && (
-        <div role="dialog" aria-modal="true" aria-label={g.items[active].alt} className="fixed inset-0 z-50 grid place-items-center bg-overlay/90 p-4 backdrop-blur-sm animate-in fade-in" onClick={() => setActive(null)}>
+      {active !== null && g.items[active] && (
+        <div role="dialog" aria-modal="true" aria-label={g.items[active]!.alt} className="fixed inset-0 z-50 grid place-items-center bg-overlay/90 p-4 backdrop-blur-sm animate-in fade-in" onClick={() => setActive(null)}>
           <button className="absolute right-5 top-5 rounded-full bg-primary-foreground/15 p-2.5 text-primary-foreground" aria-label="Close"><X /></button>
-          <img src={g.items[active].src} alt={g.items[active].alt} className="max-h-[85vh] max-w-full rounded-2xl object-contain animate-in zoom-in-95" onClick={(e) => e.stopPropagation()} />
+          <img src={g.items[active]!.src} alt={g.items[active]!.alt} className="max-h-[85vh] max-w-full rounded-2xl object-contain animate-in zoom-in-95" onClick={(e) => e.stopPropagation()} />
         </div>
       )}
     </section>
