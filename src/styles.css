@@ -21,6 +21,10 @@
   --brand-accent: #ff5200;
   --brand-bg: oklch(0.99 0.005 90);
   --brand-surface: oklch(0.965 0.015 250);
+  --brand-fun-sun: #ffc93c;
+  --brand-fun-teal: #2ec4b6;
+  --brand-fun-sky: #4d96ff;
+  --brand-fun-coral: #ff6b6b;
   --font-heading: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-accent: "Playfair Display", Georgia, serif;
@@ -142,13 +146,30 @@
   letter-spacing: 0; color: var(--brand-secondary);
 }
 
+/* Playful kindergarten inspiration — fun shapes, stickers, dot patterns */
+@utility dot-grid {
+  background-image: radial-gradient(color-mix(in oklab, var(--primary-foreground) 35%, transparent) 2px, transparent 2.5px);
+  background-size: 22px 22px;
+}
+@utility dot-grid-dark {
+  background-image: radial-gradient(color-mix(in oklab, var(--brand-primary) 14%, transparent) 2px, transparent 2.5px);
+  background-size: 22px 22px;
+}
+@utility sticker {
+  transform: rotate(-3deg);
+  border: 3px solid var(--brand-fun-sun);
+  box-shadow: 0 12px 24px -12px color-mix(in oklab, var(--brand-primary) 45%, transparent);
+}
+
 /* Scroll reveal */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
 .reveal.is-visible { opacity: 1; transform: none; }
 @keyframes hero-in { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
 @keyframes hero-zoom { from { transform: scale(1.08); } to { transform: scale(1); } }
+@keyframes float-soft { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-12px) rotate(4deg); } }
 .hero-in { animation: hero-in 1s cubic-bezier(.2,.7,.2,1) both; }
 .hero-zoom { animation: hero-zoom 2.4s ease-out both; }
+.float-soft { animation: float-soft 6s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) {
-  .reveal, .hero-in, .hero-zoom { animation: none; opacity: 1; transform: none; transition: none; }
+  .reveal, .hero-in, .hero-zoom, .float-soft { animation: none; opacity: 1; transform: none; transition: none; }
 }

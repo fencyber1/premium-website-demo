@@ -22,7 +22,8 @@ export const Route = createFileRoute("/")({
 });
 
 const icons = { academic: BookOpen, teachers: HeartHandshake, safe: ShieldCheck, character: Sparkles };
-const accentBg = ["bg-primary", "bg-secondary", "bg-accent", "bg-primary"];
+/* Playful rotation: navy + orange brand + sunny/teal/sky fun pops for kindergarten feel. */
+const accentBg = ["bg-primary", "bg-secondary", "bg-[#2ec4b6]", "bg-[#4d96ff]"];
 
 /* Fades children in when scrolled into view. */
 function Reveal({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) {
@@ -42,6 +43,13 @@ function Reveal({ children, delay = 0, className = "" }: { children: ReactNode; 
 function SectionHead({ eyebrow, title, titleAccent, center = true }: { eyebrow: string; title: string; titleAccent?: string; center?: boolean }) {
   return (
     <Reveal className={center ? "mx-auto max-w-2xl text-center" : ""}>
+      {center && (
+        <span aria-hidden className="mb-3 flex items-center justify-center gap-1.5">
+          <span className="h-2 w-2 rounded-full bg-[#ffc93c]" />
+          <span className="h-2 w-2 rounded-full bg-[#2ec4b6]" />
+          <span className="h-2 w-2 rounded-full bg-[#4d96ff]" />
+        </span>
+      )}
       <span className="eyebrow">{eyebrow}</span>
       <h2 className="mt-3 text-3xl font-extrabold text-primary sm:text-4xl lg:text-5xl">{title}{titleAccent ? <> <em className="accent-word">{titleAccent}</em></> : null}</h2>
     </Reveal>
@@ -107,6 +115,13 @@ function Hero() {
     <section id="top" className="relative isolate flex min-h-[92vh] items-center overflow-hidden">
       <img src={h.image} alt={h.imageAlt} width={1920} height={1088} fetchPriority="high" className="hero-zoom absolute inset-0 -z-20 h-full w-full object-cover" />
       <div className="hero-overlay absolute inset-0 -z-10" />
+      {/* Playful floating shapes (kindergarten inspiration, decorative) */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <span className="float-soft absolute right-[12%] top-[18%] h-16 w-16 rounded-full bg-[#ffc93c]/80" />
+        <span className="float-soft absolute bottom-[22%] right-[28%] h-8 w-8 rounded-full bg-[#2ec4b6]/80" style={{ animationDelay: "1.2s" }} />
+        <span className="float-soft absolute right-[38%] top-[30%] h-5 w-5 rotate-12 rounded-md bg-[#4d96ff]/80" style={{ animationDelay: "2s" }} />
+        <span className="dot-grid absolute bottom-[12%] right-[8%] h-28 w-40 opacity-60" />
+      </div>
       <div className="mx-auto w-full max-w-7xl px-5 pb-16 pt-32">
         <div className="max-w-2xl text-primary-foreground">
           <span className="hero-in inline-flex items-center gap-2 rounded-full bg-primary-foreground/15 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.14em] backdrop-blur">
@@ -137,11 +152,12 @@ function About() {
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-2">
         <Reveal className="relative">
           <img src={a.image} alt={a.imageAlt} width={1024} height={1280} loading="lazy" className="aspect-[4/5] w-full rounded-3xl object-cover shadow-lift" />
-          <div className="absolute -bottom-6 right-6 rounded-2xl bg-card p-5 shadow-lift sm:-right-6">
+          <div className="sticker absolute -bottom-6 right-6 rounded-2xl bg-card p-5 shadow-lift sm:-right-6">
             <p className="font-heading text-2xl font-extrabold text-primary">{a.badge.value}</p>
             <p className="text-sm text-muted-foreground">{a.badge.label}</p>
           </div>
           <div className="absolute -left-4 -top-4 -z-10 h-32 w-32 rounded-3xl bg-secondary/40" />
+          <span aria-hidden className="dot-grid-dark absolute -right-5 -top-6 h-20 w-28 opacity-70" />
         </Reveal>
         <div>
           <SectionHead eyebrow={a.eyebrow} title={a.title} center={false} />
@@ -166,8 +182,8 @@ function Why() {
             const Icon = icons[it.icon as keyof typeof icons];
             return (
               <Reveal key={it.title} delay={i * 100}>
-                <article className="group h-full rounded-3xl bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
-                  <span className={`grid h-14 w-14 place-items-center rounded-2xl ${accentBg[i]} ${i === 1 ? "text-secondary-foreground" : "text-primary-foreground"} transition-transform duration-300 group-hover:scale-110`}><Icon className="h-6 w-6" /></span>
+                <article className={`group h-full rounded-3xl bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:rotate-0 hover:shadow-lift ${i % 2 === 0 ? "sm:-rotate-1" : "sm:rotate-1"}`}>
+                  <span className={`grid h-14 w-14 place-items-center rounded-2xl ${accentBg[i]} text-primary-foreground transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6`}><Icon className="h-6 w-6" /></span>
                   <h3 className="mt-6 text-xl font-bold text-primary">{it.title}</h3>
                   <p className="mt-3 leading-relaxed text-muted-foreground">{it.text}</p>
                 </article>
