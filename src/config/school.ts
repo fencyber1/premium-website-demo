@@ -16,20 +16,19 @@ import aboutImg from "@/assets/about.jpg";
 import nurseryImg from "@/assets/nursery.jpg";
 import kindergartenImg from "@/assets/kindergarten.jpg";
 import primaryImg from "@/assets/primary.jpg";
-import juniorImg from "@/assets/junior.jpg";
 import playImg from "@/assets/gallery-play.jpg";
 import musicImg from "@/assets/gallery-music.jpg";
 
 /* Google Fonts stylesheet. Change the families here AND the
- * --font-heading / --font-body / --font-accent variables in src/styles.css. */
+ * --font-heading / --font-body / --font-accent / --font-display variables in src/styles.css. */
 export const FONT_URL =
-  "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap";
+  "https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap";
 
 export const school = {
   /* ---- Identity ------------------------------------------------------ */
-  name: "Bright Future School",
-  shortName: "Bright Future", // used in the logo lockup
-  tagline: "Strong foundations. Bright futures.",
+  name: "Little Blooms",
+  shortName: "Little Blooms", // used in the logo lockup
+  tagline: "Nurturing the unique spark in every child.",
   /* Logo: set to an imported image to use a real logo, or leave null
    * to show the built-in monogram (first letters of shortName). */
   logo: null as string | null,
@@ -37,122 +36,107 @@ export const school = {
   /* ---- Navigation (label → section id) ------------------------------ */
   nav: [
     { label: "About", href: "#about" },
-    { label: "Why Us", href: "#why" },
     { label: "Programs", href: "#programs" },
-    { label: "School Life", href: "#life" },
-    { label: "Admissions", href: "#admissions" },
     { label: "Contact", href: "#contact" },
   ],
 
   /* ---- Hero ---------------------------------------------------------- */
   hero: {
-    eyebrow: "Now enrolling for the new academic year",
-    headline: "Building Strong Foundations for Bright Futures.",
+    eyebrow: "Admissions open for 2026",
+    headline: "Little Blooms",
     headlineAccent: "" as string,
     subtext:
-      "Creating a safe, inspiring environment where every child can learn, grow and prepare for tomorrow.",
+      "A world of wonder, creativity, and gentle growth awaits your child at our kinderhaus.",
     image: heroImg,
-    imageAlt: "Smiling students raising their hands in a sunlit classroom",
-    primaryCta: { label: "Apply Now", href: "#admissions" },
-    secondaryCta: { label: "Contact Us", href: "#contact" },
-    stats: [
-      { value: "15+", label: "Years of excellence" },
-      { value: "1:12", label: "Teacher ratio" },
-      { value: "98%", label: "Parent satisfaction" },
-    ],
+    imageAlt: "Smiling child wearing a handmade flower crown in a sunny garden",
+    primaryCta: { label: "Discover Our World", href: "#about" },
+    secondaryCta: { label: "Book a Tour", href: "#contact" },
   },
 
   /* ---- About --------------------------------------------------------- */
   about: {
-    eyebrow: "About us",
-    title: "Where curious minds become confident learners.",
+    eyebrow: "Welcome",
+    title: "A Nurturing Place to Grow",
     body: [
-      "At Bright Future School, we believe every child carries remarkable potential. Our mission is to nurture it with excellent teaching, genuine care and a love of learning that lasts a lifetime.",
-      "From the first day of Nursery to the final year of Junior High, we focus on strong academic foundations, good character and the confidence to take on tomorrow.",
+      "We believe every child is a unique individual with boundless potential. Our sunlit spaces and nature-infused curriculum provide the perfect environment for curiosity to flourish and friendships to form.",
+      "We blend structured activities with imaginative free play, focusing on emotional, social, and cognitive development.",
     ],
     image: aboutImg,
-    imageAlt: "Teacher reading a story to young children in the school library",
-    badge: { value: "Est. 2010", label: "Trusted by families" },
+    imageAlt: "Children playing and learning together in a bright classroom",
+    badge: { value: "Since 2035", label: "Nature-first kinderhaus" },
   },
 
-  /* ---- Why Choose Us (icon: academic | teachers | safe | character) -- */
+  /* ---- Discovery pillars (icon: academic | teachers | safe | character) -- */
   why: {
-    eyebrow: "Why choose us",
-    title: "Everything your child needs to thrive.",
+    eyebrow: "Our approach",
+    title: "Learning Through Joyful Discovery",
     items: [
-      { icon: "academic", title: "Strong Academic Foundation", text: "A rigorous, well-rounded curriculum that builds real understanding in literacy, numeracy and science." },
-      { icon: "teachers", title: "Caring & Qualified Teachers", text: "Experienced educators who know every child by name and support them to reach their best." },
-      { icon: "safe", title: "Safe Learning Environment", text: "Secure campus, clear safeguarding policies and a warm culture where children feel at home." },
-      { icon: "character", title: "Character Development", text: "Respect, responsibility and kindness are woven into every lesson and every school day." },
+      { icon: "character", title: "Creative Expression", text: "Daily art, music, and storytelling to ignite imagination and foster early social skills." },
+      { icon: "academic", title: "Play-Based Academics", text: "Introducing early literacy and numeracy through engaging games that celebrate each child's unique spirit." },
+      { icon: "safe", title: "Nature Connection", text: "Exploring the outdoors in our garden classroom to build resilience and respect for the natural world." },
     ],
+  },
+
+  /* ---- Rhythm band --------------------------------------------------- */
+  rhythm: {
+    eyebrow: "Daily life",
+    title: "The Rhythm of Our Day",
+    text: "From circle time songs to garden adventures, our days are filled with laughter and learning. We balance energetic play with quiet moments, ensuring a happy and harmonious experience for all.",
+    cta: { label: "See Our Programs", href: "#programs" },
   },
 
   /* ---- Programs ------------------------------------------------------ */
   programs: {
     eyebrow: "Our programs",
-    title: "A clear path from first steps to high school.",
+    title: "Growing with us, year by year.",
     items: [
-      { name: "Nursery", ages: "Ages 2–3", description: "Gentle, play-based learning that builds curiosity, language and social skills.", image: nurseryImg, href: "#contact" },
-      { name: "Kindergarten", ages: "Ages 4–5", description: "Early literacy, numbers and creativity in a joyful, structured setting.", image: kindergartenImg, href: "#contact" },
-      { name: "Primary", ages: "Ages 6–11", description: "Strong core skills with hands-on science, arts, sport and technology.", image: primaryImg, href: "#contact" },
-      { name: "Junior High", ages: "Ages 12–15", description: "Deeper learning, leadership and study habits that prepare for success ahead.", image: juniorImg, href: "#contact" },
+      { name: "Seedlings", ages: "Ages 2–3", description: "Gentle, play-based first steps that build curiosity, language and social skills.", image: nurseryImg, href: "#contact" },
+      { name: "Sprouts", ages: "Ages 4–5", description: "Early literacy, numbers and creativity in a joyful, structured setting.", image: kindergartenImg, href: "#contact" },
+      { name: "Explorers", ages: "Ages 5–6", description: "Hands-on projects, garden science, arts and music to get ready for school.", image: primaryImg, href: "#contact" },
     ],
     linkLabel: "Learn more",
   },
 
   /* ---- School Life gallery (tall: true makes a taller tile) ---------- */
   gallery: {
-    eyebrow: "School life",
-    title: "Learning, laughing and growing",
-    titleAccent: "together.",
+    eyebrow: "Gallery",
+    title: "A Sneak Peek into Our World",
+    titleAccent: "",
     items: [
-      { src: playImg, alt: "Students playing football on the school field", tall: true },
-      { src: musicImg, alt: "Students singing in music class with their teacher" },
-      { src: primaryImg, alt: "Students exploring plants with magnifying glasses" },
+      { src: playImg, alt: "Children playing together in the garden", tall: true },
+      { src: musicImg, alt: "Children singing in music class with their teacher" },
+      { src: primaryImg, alt: "Children exploring plants with magnifying glasses" },
       { src: kindergartenImg, alt: "Kindergarten children painting watercolors", tall: true },
-      { src: juniorImg, alt: "Junior High students collaborating on a project" },
+      { src: aboutImg, alt: "Teacher reading a story to young children" },
       { src: nurseryImg, alt: "Toddlers building with wooden blocks" },
     ],
   },
 
-  /* ---- Admissions ---------------------------------------------------- */
-  admissions: {
-    eyebrow: "Admissions",
-    title: "Joining us is simple.",
-    steps: [
-      { title: "Enquire", text: "Send us a message or call — we'll answer every question." },
-      { title: "Visit", text: "Tour our campus, meet teachers and see classes in action." },
-      { title: "Enrol", text: "Complete a short application and welcome to the family." },
-    ],
-    cta: { label: "Start Admission", href: "#contact" },
-  },
-
   /* ---- Testimonials (demo content — replace with real quotes) -------- */
   testimonials: {
-    eyebrow: "Parent voices",
-    title: "Families who trust us.",
-    note: "Sample testimonials shown for demonstration purposes.",
+    eyebrow: "Testimonials",
+    title: "What Our Families Say",
     items: [
-      { quote: "Our daughter wakes up excited for school every day. The teachers truly care, and her confidence has grown enormously.", name: "Demo Parent", detail: "Class of 2030" },
-      { quote: "Clear communication, a safe campus and real academic progress. We couldn't ask for more from a school.", name: "Sample Parent", detail: "Class of 2028" },
-      { quote: "The focus on character as well as grades is exactly what we wanted. Our son has become kind, curious and responsible.", name: "Example Parent", detail: "Class of 2032" },
+      { quote: "SonnenBloom is more than a school; it's a community where our daughter has truly thrived and found her spark.", name: "Anouk De Vries", detail: "Kindergarten parent" },
+      { quote: "A beautiful philosophy brought to life with care and intention. A warm, nurturing environment — truly a magical place for children to grow, explore, and feel safe.", name: "Clara Dubois", detail: "Preschool parent" },
+      { quote: "The teachers' dedication is incredible. They celebrate each child's unique spirit every single day.", name: "Matteo Rossi", detail: "Nursery parent" },
     ],
   },
 
   /* ---- Final CTA ----------------------------------------------------- */
   finalCta: {
-    title: "Give Your Child a Strong Start.",
-    text: "Places are limited each year. Speak to our admissions team today.",
-    cta: { label: "Contact Admissions", href: "mailto:admissions@brightfuture.school" },
+    title: "Ready to Start the Journey?",
+    text: "Come see our sunlit spaces and garden classroom. We would love to meet your family.",
+    cta: { label: "Book a Tour", href: "#contact" },
   },
 
   /* ---- Contact & footer --------------------------------------------- */
   contact: {
-    phone: "+233 20 000 0000",
-    whatsapp: "233200000000", // digits only, international format, no "+"
-    whatsappMessage: "Hello! I'd like to learn more about admissions.",
-    email: "admissions@brightfuture.school",
-    address: "12 Learning Avenue, Sunrise District, Accra",
+    phone: "123-456-7890",
+    whatsapp: "1234567890", // digits only, international format, no "+"
+    whatsappMessage: "Hello! I'd like to book a tour.",
+    email: "hello@littleblooms.school",
+    address: "500 Terry Francine St, San Francisco, CA 94158",
     socials: {
       facebook: "https://facebook.com",
       instagram: "https://instagram.com",

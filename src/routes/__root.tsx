@@ -79,8 +79,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Bright Future School" },
-      { name: "description", content: "A safe, inspiring school building strong foundations." },
+      { title: "Little Blooms" },
+      { name: "description", content: "A world of wonder, creativity, and gentle growth for your child." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },

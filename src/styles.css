@@ -5,34 +5,37 @@
 @custom-variant dark (&:is(.dark *));
 
 /* =====================================================================
- * BRAND CONFIG — change these to rebrand for a new school.
- *   --brand-primary   navy (nav, headings, primary surfaces, overlay base)
- *   --brand-secondary orange accent (#FF5200 — primary buttons, highlights)
- *   --brand-accent    orange accent (#FF5200 — eyebrow, icons, serif accent word)
- *   --brand-bg        page background
- *   --brand-surface   alternate section background (pale blue)
- *   --font-heading / --font-body: modern geometric sans (Plus Jakarta Sans)
- *   --font-accent: italic serif for accent word only (Playfair Display Italic)
+ * BRAND CONFIG — SonnenBloom (playful kindergarten) rebuild.
+ *   --brand-primary   forest ink (nav, headings, footer, overlay base)
+ *   --brand-secondary mint pill CTA (#D8F3A5 — primary buttons)
+ *   --brand-accent    lavender pop (#8B7CF6 — dots, decorative shapes)
+ *   --brand-bg        warm cream page background
+ *   --brand-surface   deeper cream alternate sections
+ *   --font-heading / --font-body: friendly geometric sans (Plus Jakarta Sans)
+ *   --font-display: playful script for hero/logo (Caveat)
+ *   --font-accent: italic serif, kept for accent-word utility
  *   (src/config/school.ts)
  * ===================================================================== */
 :root {
-  --brand-primary: #0b1e42;
-  --brand-secondary: #ff5200;
-  --brand-accent: #ff5200;
-  --brand-bg: oklch(0.99 0.005 90);
-  --brand-surface: oklch(0.965 0.015 250);
+  --brand-primary: #20402e;
+  --brand-secondary: #d8f3a5;
+  --brand-accent: #8b7cf6;
+  --brand-bg: #fbf7ec;
+  --brand-surface: #f3ecd7;
   --brand-fun-sun: #ffc93c;
   --brand-fun-teal: #2ec4b6;
   --brand-fun-sky: #4d96ff;
   --brand-fun-coral: #ff6b6b;
   --font-heading: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Caveat", cursive;
   --font-accent: "Playfair Display", Georgia, serif;
 }
 
 @theme inline {
   --font-heading: var(--font-heading);
   --font-sans: var(--font-body);
+  --font-display: var(--font-display);
   --font-accent: var(--font-accent);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -68,21 +71,21 @@
 :root {
   --radius: 1rem;
   --background: var(--brand-bg);
-  --foreground: #0b1e42;
-  --card: oklch(1 0 0);
-  --card-foreground: #0b1e42;
-  --popover: oklch(1 0 0);
-  --popover-foreground: #0b1e42;
+  --foreground: #20402e;
+  --card: #fffdf5;
+  --card-foreground: #20402e;
+  --popover: #fffdf5;
+  --popover-foreground: #20402e;
   --primary: var(--brand-primary);
-  --primary-foreground: #eef3ff;
+  --primary-foreground: #fbf7ec;
   --secondary: var(--brand-secondary);
-  --secondary-foreground: oklch(0.99 0 0);
+  --secondary-foreground: #20402e;
   --accent: var(--brand-accent);
-  --accent-foreground: oklch(0.99 0 0);
-  --muted: oklch(0.95 0.01 250);
-  --muted-foreground: oklch(0.48 0.03 262);
+  --accent-foreground: #fbf7ec;
+  --muted: #efe6cf;
+  --muted-foreground: #5a6f60;
   --surface: var(--brand-surface);
-  --overlay: #0a1834;
+  --overlay: #16281e;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.99 0 0);
   --border: oklch(0.91 0.015 255);
@@ -116,8 +119,9 @@
 }
 @utility btn-primary {
   background: var(--secondary); color: var(--secondary-foreground);
-  box-shadow: 0 10px 24px -10px color-mix(in oklab, var(--secondary) 80%, transparent);
-  &:hover { box-shadow: 0 16px 30px -10px color-mix(in oklab, var(--secondary) 90%, transparent); }
+  border: 1.5px solid color-mix(in oklab, var(--secondary-foreground) 80%, transparent);
+  box-shadow: 0 10px 24px -10px color-mix(in oklab, var(--brand-primary) 35%, transparent);
+  &:hover { box-shadow: 0 16px 30px -10px color-mix(in oklab, var(--brand-primary) 45%, transparent); }
 }
 @utility btn-ghost-light {
   border: 2px solid color-mix(in oklab, var(--primary-foreground) 70%, transparent);
@@ -137,13 +141,13 @@
 }
 @utility eyebrow {
   display: inline-block; font-family: var(--font-body); font-size: .8rem; font-weight: 600; letter-spacing: .18em;
-  text-transform: uppercase; color: var(--accent);
+  text-transform: uppercase; color: var(--primary);
 }
 
-/* Italic serif accent word — orange, elegant, high-contrast. Use only for "together." */
+/* Italic serif accent word — kept for section titles that use titleAccent */
 @utility accent-word {
   font-family: var(--font-accent); font-style: italic; font-weight: 500;
-  letter-spacing: 0; color: var(--brand-secondary);
+  letter-spacing: 0; color: var(--primary);
 }
 
 /* Playful kindergarten inspiration — fun shapes, stickers, dot patterns */

@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   ArrowRight, BookOpen, Facebook, HeartHandshake, Instagram, Mail, MapPin,
-  Menu, MessageCircle, Phone, Quote, ShieldCheck, Sparkles, X, Youtube,
+  Menu, MessageCircle, Phone, ShieldCheck, Sparkles, X, Youtube,
 } from "lucide-react";
 import { school } from "@/config/school";
 
@@ -22,8 +22,9 @@ export const Route = createFileRoute("/")({
 });
 
 const icons = { academic: BookOpen, teachers: HeartHandshake, safe: ShieldCheck, character: Sparkles };
-/* Playful rotation: navy + orange brand + sunny/teal/sky fun pops for kindergarten feel. */
-const accentBg = ["bg-primary", "bg-secondary", "bg-[#2ec4b6]", "bg-[#4d96ff]"];
+/* SonnenBloom rotation: lavender + teal + sunny pops on forest green. */
+const accentBg = ["bg-[#8b7cf6]", "bg-[#2ec4b6]", "bg-[#ffc93c]"];
+const accentFg = ["text-primary-foreground", "text-primary-foreground", "text-primary"];
 
 /* Fades children in when scrolled into view. */
 function Reveal({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) {
@@ -61,16 +62,16 @@ function Logo({ light = false }: { light?: boolean }) {
   return (
     <a href="#top" className="flex min-w-0 items-center gap-2.5" aria-label={`${school.name} home`}>
       {school.logo ? (
-        <img src={school.logo} alt="" className="h-10 w-10 shrink-0 rounded-xl object-contain" />
+        <img src={school.logo} alt="" className="h-10 w-10 shrink-0 rounded-full object-contain" />
       ) : (
-        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-secondary font-heading text-lg font-extrabold text-secondary-foreground">{initials}</span>
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-secondary font-display text-xl font-bold text-secondary-foreground">{initials}</span>
       )}
-      <span className={`truncate font-heading text-lg font-extrabold ${light ? "text-primary-foreground" : "text-primary"}`}>{school.name}</span>
+      <span className={`truncate font-display text-3xl font-bold leading-none ${light ? "text-primary-foreground" : "text-primary"}`}>{school.name}</span>
     </a>
   );
 }
 
-/* ---------------- Sticky navigation ---------------- */
+/* ---------------- Floating pill navigation (SonnenBloom style) ---------------- */
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -81,23 +82,22 @@ function Nav() {
   }, []);
   const solid = scrolled || open;
   return (
-    <header className={`fixed inset-x-0 top-0 z-40 transition-all duration-300 ${solid ? "bg-card/95 shadow-soft backdrop-blur" : "bg-transparent"}`}>
-      <nav className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-3.5 lg:flex lg:justify-between" aria-label="Main">
-        <Logo light={!solid} />
-        <ul className="hidden items-center gap-7 lg:flex">
-          {school.nav.map((n) => (
-            <li key={n.href}><a href={n.href} className={`text-sm font-semibold transition-colors hover:text-secondary ${solid ? "text-foreground" : "text-primary-foreground"}`}>{n.label}</a></li>
-          ))}
-        </ul>
-        <div className="flex items-center gap-2">
-          <a href={school.hero.primaryCta.href} className="btn btn-primary hidden !py-2.5 sm:inline-flex">{school.hero.primaryCta.label}</a>
-          <button onClick={() => setOpen(!open)} className={`rounded-full p-2 lg:hidden ${solid ? "text-primary" : "text-primary-foreground"}`} aria-label="Toggle menu" aria-expanded={open}>
-            {open ? <X /> : <Menu />}
-          </button>
+    <header className="fixed inset-x-0 top-3 z-40 px-4 sm:top-5">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
+        <div className={`rounded-full px-4 py-2 transition-all duration-300 ${solid ? "bg-card/95 shadow-soft backdrop-blur" : "bg-transparent"}`}>
+          <Logo light={!solid} />
         </div>
-      </nav>
+        <nav className="hidden items-center gap-8 rounded-full bg-[#fffdf5]/95 px-8 py-3 shadow-soft backdrop-blur lg:flex" aria-label="Main">
+          {school.nav.map((n) => (
+            <a key={n.href} href={n.href} className="text-sm font-semibold text-primary transition-colors hover:text-accent">{n.label}</a>
+          ))}
+        </nav>
+        <button onClick={() => setOpen(!open)} className={`rounded-full p-3 shadow-soft backdrop-blur lg:hidden ${solid ? "bg-card/95 text-primary" : "bg-[#fffdf5]/90 text-primary"}`} aria-label="Toggle menu" aria-expanded={open}>
+          {open ? <X /> : <Menu />}
+        </button>
+      </div>
       {open && (
-        <ul className="border-t bg-card px-5 pb-5 lg:hidden">
+        <ul className="mx-auto mt-2 max-w-7xl rounded-3xl bg-card px-6 pb-6 pt-2 shadow-lift lg:hidden">
           {school.nav.map((n) => (
             <li key={n.href}><a href={n.href} onClick={() => setOpen(false)} className="block py-3 font-semibold text-foreground">{n.label}</a></li>
           ))}
@@ -108,36 +108,29 @@ function Nav() {
   );
 }
 
-/* ---------------- Hero ---------------- */
+/* ---------------- Hero (Little Blooms script headline) ---------------- */
 function Hero() {
   const h = school.hero;
   return (
-    <section id="top" className="relative isolate flex min-h-[92vh] items-center overflow-hidden">
+    <section id="top" className="relative isolate flex min-h-[96vh] items-center overflow-hidden rounded-b-[2.5rem]">
       <img src={h.image} alt={h.imageAlt} width={1920} height={1088} fetchPriority="high" className="hero-zoom absolute inset-0 -z-20 h-full w-full object-cover" />
       <div className="hero-overlay absolute inset-0 -z-10" />
-      {/* Playful floating shapes (kindergarten inspiration, decorative) */}
+      {/* Playful floating shapes (decorative) */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <span className="float-soft absolute right-[12%] top-[18%] h-16 w-16 rounded-full bg-[#ffc93c]/80" />
-        <span className="float-soft absolute bottom-[22%] right-[28%] h-8 w-8 rounded-full bg-[#2ec4b6]/80" style={{ animationDelay: "1.2s" }} />
-        <span className="float-soft absolute right-[38%] top-[30%] h-5 w-5 rotate-12 rounded-md bg-[#4d96ff]/80" style={{ animationDelay: "2s" }} />
-        <span className="dot-grid absolute bottom-[12%] right-[8%] h-28 w-40 opacity-60" />
+        <span className="float-soft absolute right-[12%] top-[20%] hidden h-24 w-24 rounded-full bg-[#c9b8ff]/90 sm:block" />
+        <span className="float-soft absolute bottom-[24%] right-[30%] h-8 w-8 rounded-full bg-[#d8f3a5]/80" style={{ animationDelay: "1.2s" }} />
+        <span className="float-soft absolute right-[38%] top-[32%] h-5 w-5 rotate-12 rounded-md bg-[#ffc93c]/90" style={{ animationDelay: "2s" }} />
+        <span className="dot-grid absolute bottom-[10%] right-[6%] h-28 w-40 opacity-60" />
       </div>
-      <div className="mx-auto w-full max-w-7xl px-5 pb-16 pt-32">
-        <div className="max-w-2xl text-primary-foreground">
-          <span className="hero-in inline-flex items-center gap-2 rounded-full bg-primary-foreground/15 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.14em] backdrop-blur">
-            <span className="h-2 w-2 rounded-full bg-accent" />{h.eyebrow}
-          </span>
-          <h1 className="hero-in mt-6 text-4xl font-extrabold leading-[1.05] sm:text-6xl lg:text-7xl" style={{ animationDelay: "120ms" }}>{h.headline}{h.headlineAccent ? <> <em className="accent-word">{h.headlineAccent}</em></> : null}</h1>
+      <div className="mx-auto w-full max-w-7xl px-5 pb-20 pt-36">
+        <div className="max-w-3xl text-primary-foreground">
+          <p className="hero-in text-sm font-semibold uppercase tracking-[0.22em] text-primary-foreground/80">{h.eyebrow}</p>
+          <h1 className="hero-in mt-4 -rotate-2 font-display text-8xl font-bold leading-[0.9] sm:text-9xl lg:text-[10rem]" style={{ animationDelay: "120ms" }}>{h.headline}{h.headlineAccent ? <> <em className="accent-word">{h.headlineAccent}</em></> : null}</h1>
           <p className="hero-in mt-6 max-w-xl text-lg font-normal text-primary-foreground/85 sm:text-xl" style={{ animationDelay: "240ms" }}>{h.subtext}</p>
           <div className="hero-in mt-9 flex flex-wrap gap-3" style={{ animationDelay: "360ms" }}>
             <a href={h.primaryCta.href} className="btn btn-primary">{h.primaryCta.label}<ArrowRight className="h-4 w-4" /></a>
             <a href={h.secondaryCta.href} className="btn btn-ghost-light">{h.secondaryCta.label}</a>
           </div>
-          <dl className="hero-in mt-14 grid max-w-lg grid-cols-3 gap-6 border-t border-primary-foreground/20 pt-6" style={{ animationDelay: "480ms" }}>
-            {h.stats.map((s) => (
-              <div key={s.label}><dt className="sr-only">{s.label}</dt><dd className="font-heading text-3xl font-extrabold text-secondary">{s.value}</dd><dd className="text-sm text-primary-foreground/75">{s.label}</dd></div>
-            ))}
-          </dl>
         </div>
       </div>
     </section>
@@ -170,28 +163,44 @@ function About() {
   );
 }
 
-/* ---------------- Why choose us ---------------- */
+/* ---------------- Discovery pillars ---------------- */
 function Why() {
   const w = school.why;
   return (
-    <section id="why" className="bg-surface py-24 lg:py-32">
+    <section id="why" className="py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-5">
         <SectionHead eyebrow={w.eyebrow} title={w.title} />
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto mt-14 grid max-w-5xl gap-10 text-center md:grid-cols-3">
           {w.items.map((it, i) => {
             const Icon = icons[it.icon as keyof typeof icons];
             return (
               <Reveal key={it.title} delay={i * 100}>
-                <article className={`group h-full rounded-3xl bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:rotate-0 hover:shadow-lift ${i % 2 === 0 ? "sm:-rotate-1" : "sm:rotate-1"}`}>
-                  <span className={`grid h-14 w-14 place-items-center rounded-2xl ${accentBg[i]} text-primary-foreground transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6`}><Icon className="h-6 w-6" /></span>
-                  <h3 className="mt-6 text-xl font-bold text-primary">{it.title}</h3>
-                  <p className="mt-3 leading-relaxed text-muted-foreground">{it.text}</p>
-                </article>
+                <span className={`mx-auto grid h-16 w-16 place-items-center rounded-full ${accentBg[i]} ${accentFg[i]} shadow-soft`}><Icon className="h-7 w-7" /></span>
+                <h3 className="mt-6 text-xl font-bold text-primary">{it.title}</h3>
+                <p className="mx-auto mt-3 max-w-xs leading-relaxed text-muted-foreground">{it.text}</p>
               </Reveal>
             );
           })}
         </div>
       </div>
+    </section>
+  );
+}
+
+/* ---------------- Rhythm band ---------------- */
+function Rhythm() {
+  const r = school.rhythm;
+  return (
+    <section id="rhythm" className="px-5 pb-4">
+      <Reveal className="relative mx-auto max-w-6xl overflow-hidden rounded-[2.5rem] bg-primary px-8 py-16 text-center text-primary-foreground shadow-lift sm:py-20">
+        <span aria-hidden className="dot-grid absolute left-[6%] top-[12%] h-24 w-36 opacity-40" />
+        <span aria-hidden className="float-soft absolute -right-8 top-10 h-28 w-28 rounded-full bg-[#c9b8ff]/40" />
+        <span aria-hidden className="float-soft absolute -left-10 bottom-8 h-24 w-24 rounded-full bg-[#d8f3a5]/25" style={{ animationDelay: "1.5s" }} />
+        <p className="relative text-sm font-semibold uppercase tracking-[0.22em] text-primary-foreground/70">{r.eyebrow}</p>
+        <h2 className="relative mx-auto mt-4 max-w-2xl font-display text-6xl font-bold leading-[0.95] sm:text-7xl">{r.title}</h2>
+        <p className="relative mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-primary-foreground/80">{r.text}</p>
+        <a href={r.cta.href} className="btn btn-primary relative mt-8">{r.cta.label}<ArrowRight className="h-4 w-4" /></a>
+      </Reveal>
     </section>
   );
 }
@@ -203,7 +212,7 @@ function Programs() {
     <section id="programs" className="py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-5">
         <SectionHead eyebrow={p.eyebrow} title={p.title} />
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {p.items.map((it, i) => (
             <Reveal key={it.name} delay={i * 100}>
               <article className="group flex h-full flex-col overflow-hidden rounded-3xl bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
@@ -249,6 +258,7 @@ function Gallery() {
             </button>
           ))}
         </div>
+        <Reveal className="mt-10 text-center"><a href="#programs" className="btn btn-solid">See Our World in Bloom<ArrowRight className="h-4 w-4" /></a></Reveal>
       </div>
       {active !== null && g.items[active] && (
         <div role="dialog" aria-modal="true" aria-label={g.items[active]!.alt} className="fixed inset-0 z-50 grid place-items-center bg-overlay/90 p-4 backdrop-blur-sm animate-in fade-in" onClick={() => setActive(null)}>
@@ -260,32 +270,7 @@ function Gallery() {
   );
 }
 
-/* ---------------- Admissions ---------------- */
-function Admissions() {
-  const a = school.admissions;
-  return (
-    <section id="admissions" className="py-24 lg:py-32">
-      <div className="mx-auto max-w-6xl px-5">
-        <SectionHead eyebrow={a.eyebrow} title={a.title} />
-        <ol className="relative mt-16 grid gap-10 md:grid-cols-3">
-          <div className="absolute left-[16%] right-[16%] top-8 hidden h-0.5 border-t-2 border-dashed border-secondary md:block" aria-hidden />
-          {a.steps.map((s, i) => (
-            <Reveal key={s.title} delay={i * 150}>
-              <li className="relative text-center">
-                <span className={`mx-auto grid h-16 w-16 place-items-center rounded-full font-heading text-2xl font-extrabold shadow-soft ring-8 ring-background ${accentBg[i]} ${i === 1 ? "text-secondary-foreground" : "text-primary-foreground"}`}>{i + 1}</span>
-                <h3 className="mt-6 text-2xl font-bold text-primary">{s.title}</h3>
-                <p className="mx-auto mt-2 max-w-xs text-muted-foreground">{s.text}</p>
-              </li>
-            </Reveal>
-          ))}
-        </ol>
-        <Reveal className="mt-14 text-center"><a href={a.cta.href} className="btn btn-solid">{a.cta.label}<ArrowRight className="h-4 w-4" /></a></Reveal>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- Testimonials ---------------- */
+/* ---------------- Testimonials (numbered, SonnenBloom style) ---------------- */
 function Testimonials() {
   const t = school.testimonials;
   return (
@@ -296,14 +281,13 @@ function Testimonials() {
           {t.items.map((q, i) => (
             <Reveal key={i} delay={i * 100}>
               <figure className="flex h-full flex-col rounded-3xl bg-card p-8 shadow-soft">
-                <Quote className="h-8 w-8 text-secondary" />
+                <span aria-hidden className="font-display text-5xl font-bold text-accent">0{i + 1}</span>
                 <blockquote className="mt-4 flex-1 text-lg leading-relaxed">“{q.quote}”</blockquote>
                 <figcaption className="mt-6 border-t pt-4"><p className="font-bold text-primary">{q.name}</p><p className="text-sm text-muted-foreground">{q.detail}</p></figcaption>
               </figure>
             </Reveal>
           ))}
         </div>
-        <p className="mt-8 text-center text-sm italic text-muted-foreground">{t.note}</p>
       </div>
     </section>
   );
@@ -317,7 +301,7 @@ function FinalCta() {
       <Reveal className="relative mx-auto max-w-5xl overflow-hidden rounded-[2.5rem] bg-primary px-8 py-16 text-center text-primary-foreground shadow-lift sm:py-20">
         <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-secondary/30" aria-hidden />
         <div className="absolute -bottom-20 -left-10 h-56 w-56 rounded-full bg-accent/30" aria-hidden />
-        <h2 className="relative text-3xl font-extrabold sm:text-5xl">{f.title}</h2>
+        <h2 className="relative font-display text-6xl font-bold leading-[0.95] sm:text-7xl">{f.title}</h2>
         <p className="relative mx-auto mt-4 max-w-xl text-lg text-primary-foreground/80">{f.text}</p>
         <a href={f.cta.href} className="btn btn-primary relative mt-8">{f.cta.label}<ArrowRight className="h-4 w-4" /></a>
       </Reveal>
@@ -345,7 +329,7 @@ function Footer() {
       <div className="mx-auto grid max-w-7xl gap-12 px-5 md:grid-cols-[1.2fr_1fr_1fr]">
         <div>
           <Logo light />
-          <p className="mt-4 max-w-xs text-sm font-semibold uppercase tracking-[0.18em] text-primary-foreground/70">{school.tagline}</p>
+          <p className="mt-4 max-w-xs leading-relaxed text-primary-foreground/70">{school.tagline}</p>
           <div className="mt-6 flex gap-3">
             {socials.map((s) => (
               <a key={s.label} href={s.href} target="_blank" rel="noreferrer" aria-label={s.label} className="grid h-10 w-10 place-items-center rounded-full bg-primary-foreground/10 transition-colors hover:bg-secondary hover:text-secondary-foreground"><s.icon className="h-4 w-4" /></a>
@@ -381,9 +365,9 @@ function Index() {
       <Hero />
       <About />
       <Why />
+      <Rhythm />
       <Programs />
       <Gallery />
-      <Admissions />
       <Testimonials />
       <FinalCta />
       <Footer />
